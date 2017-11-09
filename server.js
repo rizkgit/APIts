@@ -4,6 +4,7 @@ var express = require('express');
 var app = express();
 var path = require('path');
 var fs = require('fs');
+var blc = require('./BLC');
 // ------------
 
 
@@ -95,22 +96,11 @@ app.post('/Products',function(req,res){
 app.post('/CategoryProducts',function(req,res){	
 	var CATEGORY_ID = req.body.CATEGORY_ID;	
 	var page_number = req.body.page;
-	var page_size = 5;
-	var file = './data/Products.json'
-	jsonfile.readFile(file, function(err, obj) {
-	  if (obj != null){
-		obj = obj.filter(function(x){return x.CATEGORY_ID == CATEGORY_ID});
-	  }
-	  
-	  var toRet = obj.slice((page_number - 1) * page_size, page_number * page_size);
-	  if (toRet != null){
-		  toRet.forEach((e)=>{
-			  e.IMG_URL = API_URL + '/Images/Products/' + e.IMG_URL;
-		  })
-	  }
-	  
-	  res.send(toRet);
-	})
+	var file  = './data/Products.json'
+
+	blc.getCategoryProducts(API_URL,CATEGORY_ID,page_number)
+	    .then((data) => res.send(data));
+
 })
 // ------------
 
