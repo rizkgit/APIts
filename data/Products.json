@@ -1,0 +1,246 @@
+[
+  {
+	  "ID":1,
+	  "IMG_URL":"product01.jpg",
+	  "TITLE":"Watch 01",
+	  "DESCRIPTION":"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.",
+	  "CATEGORY_ID":"1",
+	  "IS_FEATURED":true,
+	  "PRICE":"$ 20"
+  },
+  {
+	  "ID":2,
+	  "IMG_URL":"product02.jpg",
+	  "TITLE":"Watch 02",
+	  "DESCRIPTION":"Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim pellentesque felis.",
+	  "CATEGORY_ID":"1",
+	  "PRICE":"$ 24"
+  },
+  {
+	  "ID":3,
+	  "IMG_URL":"product03.jpg",
+	  "TITLE":"Watch 03",
+	  "DESCRIPTION":"Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.",
+	  "CATEGORY_ID":"1",
+	  "PRICE":"$ 30"
+  },
+  {
+	  "ID":4,
+	  "IMG_URL":"product04.jpg",
+	  "TITLE":"watch 04",
+	  "DESCRIPTION":"Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat.",
+	  "CATEGORY_ID":"1",
+	  "IS_FEATURED":true,
+	  "PRICE":"$ 37"
+  },
+  {
+	  "ID":5,
+	  "IMG_URL":"product05.jpg",
+	  "TITLE":"Watch 05",
+	  "DESCRIPTION":"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.",
+	  "CATEGORY_ID":"1",
+	  "PRICE":"$ 18"
+  },
+  {
+	  "ID":6,
+	  "IMG_URL":"product06.jpg",
+	  "TITLE":"Clothes 01",
+	  "DESCRIPTION":"Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim pellentesque felis.",
+	  "CATEGORY_ID":"2",
+	  "PRICE":"$ 22"
+  },
+  {
+	  "ID":7,
+	  "IMG_URL":"product07.jpg",
+	  "TITLE":"Clothes 02",
+	  "DESCRIPTION":"Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.",
+	  "CATEGORY_ID":"2",
+	  "PRICE":"$ 47"
+  },
+  {
+	  "ID":8,
+	  "IMG_URL":"product08.jpg",
+	  "TITLE":"Clothes 03",
+	  "DESCRIPTION":"Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat.",
+	  "CATEGORY_ID":"2",
+	  "IS_FEATURED":false,
+	  "PRICE":"$ 52"
+  },
+  {
+	  "ID":9,
+	  "IMG_URL":"product09.jpg",
+	  "TITLE":"Clothes 04",
+	  "DESCRIPTION":"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.",
+	  "CATEGORY_ID":"2",
+	  "PRICE":"$ 33"
+  },
+  {
+	  "ID":10,
+	  "IMG_URL":"product10.jpg",
+	  "TITLE":"Clothes 05",
+	  "DESCRIPTION":"Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim pellentesque felis.",
+	  "CATEGORY_ID":"2",
+	  "PRICE":"$ 54"
+  },
+  {
+	  "ID":11,
+	  "IMG_URL":"product11.jpg",
+	  "TITLE":"Home Applicances 01",
+	  "DESCRIPTION":"Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.",
+	  "CATEGORY_ID":"3",
+	  "PRICE":"$ 11"
+  },
+  {
+	  "ID":12,
+	  "IMG_URL":"product12.jpg",
+	  "TITLE":"Home Applicances 02",
+	  "DESCRIPTION":"Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat.",
+	  "CATEGORY_ID":"3",
+	  "IS_FEATURED":true,
+	  "PRICE":"$ 99"
+  },
+  {
+	  "ID":13,
+	  "IMG_URL":"product13.jpg",
+	  "TITLE":"Home Applicances 03",
+	  "DESCRIPTION":"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.",
+	  "CATEGORY_ID":"3",
+	  "PRICE":"$ 34"
+  },
+  {
+	  "ID":14,
+	  "IMG_URL":"product14.jpg",
+	  "TITLE":"Home Applicances 04",
+	  "DESCRIPTION":"Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim pellentesque felis.",
+	  "CATEGORY_ID":"3",
+	  "PRICE":"$ 23"
+  },
+  {
+	  "ID":15,
+	  "IMG_URL":"product15.jpg",
+	  "TITLE":"Home Applicances 05",
+	  "DESCRIPTION":"Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.",
+	  "CATEGORY_ID":"3",
+	  "PRICE":"$ 67"
+  },
+  {
+	  "ID":16,
+	  "IMG_URL":"product16.jpg",
+	  "TITLE":"Bed Room 01",
+	  "DESCRIPTION":"Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat.",
+	  "CATEGORY_ID":"4",
+	  "IS_FEATURED":false,
+	  "PRICE":"$ 88"
+  },
+  {
+	  "ID":17,
+	  "IMG_URL":"product17.jpg",
+	  "TITLE":"Bed Room 02",
+	  "DESCRIPTION":"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.",
+	  "CATEGORY_ID":"4",
+	  "PRICE":"$ 89"
+  },
+  {
+	  "ID":18,
+	  "IMG_URL":"product18.jpg",
+	  "TITLE":"Bed Room 03",
+	  "DESCRIPTION":"Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim pellentesque felis.",
+	  "CATEGORY_ID":"4"
+  },
+  {
+	  "ID":19,
+	  "IMG_URL":"product19.jpg",
+	  "TITLE":"Bed Room 04",
+	  "DESCRIPTION":"Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.",
+	  "CATEGORY_ID":"4",
+	  "PRICE":"$ 22"
+  },
+  {
+	  "ID":20,
+	  "IMG_URL":"product20.jpg",
+	  "TITLE":"Bed Room 05",
+	  "DESCRIPTION":"Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat.",
+	  "CATEGORY_ID":"4",
+	  "PRICE":"$ 45"
+  },
+  {
+	  "ID":21,
+	  "IMG_URL":"product21.jpg",
+	  "TITLE":"Jewellery 01",
+	  "DESCRIPTION":"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.",
+	  "CATEGORY_ID":"5",
+	  "PRICE":"$ 80"
+  },
+  {
+	  "ID":22,
+	  "IMG_URL":"product22.jpg",
+	  "TITLE":"Jewellery 02",
+	  "DESCRIPTION":"Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim pellentesque felis.",
+	  "CATEGORY_ID":"5",
+	  "PRICE":"$ 345"
+  },
+  {
+	  "ID":23,
+	  "IMG_URL":"product23.jpg",
+	  "TITLE":"Jewellery 03",
+	  "DESCRIPTION":"Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.",
+	  "CATEGORY_ID":"5",
+	  "PRICE":"$ 55"
+  },
+  {
+	  "ID":24,
+	  "IMG_URL":"product24.jpg",
+	  "TITLE":"Jewellery 04",
+	  "DESCRIPTION":"Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat.",
+	  "CATEGORY_ID":"5",
+	  "PRICE":"$ 77"
+  },
+  {
+	  "ID":25,
+	  "IMG_URL":"product25.jpg",
+	  "TITLE":"Jewellery 05",
+	  "DESCRIPTION":"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.",
+	  "CATEGORY_ID":"5",
+	  "PRICE":"$ 96"
+  },
+  {
+	  "ID":26,
+	  "IMG_URL":"product26.jpg",
+	  "TITLE":"Product 26",
+	  "DESCRIPTION":"Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim pellentesque felis.",
+	  "CATEGORY_ID":"7",
+	  "PRICE":"$ 11"
+  },
+  {
+	  "ID":27,
+	  "IMG_URL":"product27.jpg",
+	  "TITLE":"Product 27",
+	  "DESCRIPTION":"Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.",
+	  "CATEGORY_ID":"7",
+	  "PRICE":"$ 22"
+  },
+  {
+	  "ID":28,
+	  "IMG_URL":"product28.jpg",
+	  "TITLE":"Product 28",
+	  "DESCRIPTION":"Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat.",
+	  "CATEGORY_ID":"7",
+	  "PRICE":"$ 33"
+  },
+  {
+	  "ID":29,
+	  "IMG_URL":"product29.jpg",
+	  "TITLE":"Product 29",
+	  "DESCRIPTION":"Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.",
+	  "CATEGORY_ID":"8",
+	  "PRICE":"$ 33"
+  },
+  {
+	  "ID":30,
+	  "IMG_URL":"product30.jpg",
+	  "TITLE":"Product 30",
+	  "DESCRIPTION":"Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat.",
+	  "CATEGORY_ID":"8",
+	  "PRICE":"$ 69"
+  }
+]
