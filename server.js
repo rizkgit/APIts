@@ -108,7 +108,13 @@ app.post('/ProductImages', function (req, res) {
 	var page_number = req.body.page;
 
 	blc.getProductImages(API_URL, PRODUCT_ID, page_number)
-		.then((data) => res.send(data));
+		.then((data) => res.send(data)).catch((e)=>{			
+			blc.getProduct(API_URL,PRODUCT_ID).then((product)=>{
+				var array = [];
+				array.push(product);
+				res.send(array);
+			})
+		});
 })
 // ------------
 
