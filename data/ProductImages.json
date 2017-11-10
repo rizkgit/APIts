@@ -1,0 +1,26 @@
+[
+    {
+        "ID":1,
+        "IMG_URL":"prodimg1-1.jpg"        
+    },
+    {
+        "ID":1,
+        "IMG_URL":"prodimg1-2.jpg"        
+    },
+    {
+        "ID":1,
+        "IMG_URL":"prodimg1-3.jpg"        
+    },
+    {
+        "ID":6,
+        "IMG_URL":"prodimg6-1.jpg"        
+    },
+    {
+        "ID":6,
+        "IMG_URL":"prodimg6-2.jpg"        
+    },
+    {
+        "ID":6,
+        "IMG_URL":"prodimg6-3.jpg"        
+    }
+]

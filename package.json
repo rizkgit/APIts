@@ -14,7 +14,10 @@
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
     "express": "^4.16.2",
+    "google-images": "^2.1.0",
     "jsonfile": "^4.0.0",
-    "public-ip": "^2.3.5"
+    "moniker": "^0.1.2",
+    "public-ip": "^2.3.5",
+    "random-puppy": "^1.1.0"
   }
 }
