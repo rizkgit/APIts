@@ -116,6 +116,13 @@ app.post('/ProductImages', function (req, res) {
 			})
 		});
 })
+
+app.post('/ProductReviews', function (req, res) {
+	var PRODUCT_ID = req.body.PRODUCT_ID;
+	var page_number = req.body.page;
+
+	blc.getProductReviews(PRODUCT_ID).then((data) => res.send(data));
+})
 // ------------
 
 // Serving Static Files

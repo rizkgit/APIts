@@ -21,6 +21,24 @@ module.exports = {
     },
     // --------------------------------------------
 
+
+    // --------------------------------------------
+    getProductReviews: function (PRODUCT_ID) {
+        return new Promise(function (resolve, reject) {
+            var file = './data/Reviews.json'
+            jsonfile.readFile(file, function (err, obj) {
+                
+                if (obj != null) {
+                    obj = obj.filter(function (x) { return x.ID == PRODUCT_ID });
+                }
+                
+                resolve(obj);
+            })
+        });
+    },
+    // --------------------------------------------
+    
+
     // --------------------------------------------
     getCategoryProducts: function (API_URL, CATEGORY_ID, PAGE) {
         return new Promise(function (resolve, reject) {
