@@ -17,6 +17,7 @@
     "google-images": "^2.1.0",
     "jsonfile": "^4.0.0",
     "moniker": "^0.1.2",
+    "mysql": "^2.15.0",
     "public-ip": "^2.3.5",
     "random-puppy": "^1.1.0"
   }

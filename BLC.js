@@ -1,4 +1,5 @@
 var jsonfile = require('jsonfile')
+var dalc = require('./DALC');
 var page_size = 5;
 module.exports = {
 
