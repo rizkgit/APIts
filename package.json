@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node bin/server.js",
+    "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- ./server.ts"
   },
   "keywords": [],
   "author": "",
@@ -15,10 +16,18 @@
     "cors": "^2.8.4",
     "express": "^4.16.2",
     "google-images": "^2.1.0",
+    "gulp": "^3.9.1",
+    "gulp-typescript": "^3.2.3",
     "jsonfile": "^4.0.0",
     "moniker": "^0.1.2",
     "mysql": "^2.15.0",
     "public-ip": "^2.3.5",
     "random-puppy": "^1.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^8.0.51",
+    "nodemon": "^1.12.1",
+    "ts-node": "^3.3.0",
+    "typescript": "^2.6.1"
   }
 }
