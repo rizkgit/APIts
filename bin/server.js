@@ -7,6 +7,7 @@ var jsonfile = require('jsonfile');
 // ------------
 const express = require("express");
 const body_parser_1 = require("body-parser");
+const cors = require("cors");
 const path = require("path");
 const fs = require("fs");
 const BLC_1 = require("./BLC");
@@ -14,6 +15,7 @@ const BLC_Entities_1 = require("./BLC_Entities");
 class App {
     //Run configuration methods on the Express instance.
     constructor() {
+        //console.log("API Constructor");
         this.blc = new BLC_1.BLC();
         this.express = express();
         this.middleware();
@@ -21,9 +23,9 @@ class App {
     }
     // Configure Express middleware.
     middleware() {
-        // express.use(json());
-        // express.use(urlencoded({ extended: false }));
-        // express.use(cors({ origin: 'http://localhost:8100' }));
+        this.express.use(body_parser_1.json());
+        this.express.use(body_parser_1.urlencoded({ extended: false }));
+        this.express.use(cors({ origin: 'http://localhost:8100' }));
     }
     // Configure API endpoints.
     routes() {
@@ -39,7 +41,7 @@ class App {
         });
         router.get('/FeaturedProducts', (req, res, next) => {
             var file = './data/Products.json';
-            jsonfile.readFile(file, function (err, obj) {
+            jsonfile.readFile(file, (err, obj) => {
                 var toRet = [];
                 obj.forEach((e) => {
                     if (e.IS_FEATURED == true) {
@@ -50,6 +52,7 @@ class App {
                 if (toRet != null) {
                     toRet.forEach((e) => {
                         e.IMG_URL = API_URL + '/Images/Products/' + e.IMG_URL;
+                        console.log(e.IMG_URL);
                     });
                 }
                 res.send(toRet);
@@ -139,6 +142,7 @@ class App {
                 return res.status(403).end('Forbidden');
             }
             var type = mime[path.extname(file).slice(1)] || 'text/plain';
+            file = file.replace('\\bin\\', '\\');
             var s = fs.createReadStream(file);
             s.on('open', function () {
                 res.set('Content-Type', type);

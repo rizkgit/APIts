@@ -25,6 +25,7 @@ class App {
 	public blc : BLC;
 	//Run configuration methods on the Express instance.
 	constructor() {
+		//console.log("API Constructor");
 		this.blc = new BLC();
 		this.express = express();
 		this.middleware();
@@ -32,9 +33,9 @@ class App {
 	}
 	// Configure Express middleware.
 	private middleware(): void {
-		// express.use(json());
-		// express.use(urlencoded({ extended: false }));
-		// express.use(cors({ origin: 'http://localhost:8100' }));
+		this.express.use(json());
+		this.express.use(urlencoded({ extended: false }));
+		this.express.use(cors({ origin: 'http://localhost:8100' }));
 	}
 
 	// Configure API endpoints.
@@ -56,7 +57,7 @@ class App {
 		router.get('/FeaturedProducts', (req, res, next) => {
 
 			var file = './data/Products.json'
-			jsonfile.readFile(file, function (err, obj) {
+			jsonfile.readFile(file, (err, obj)=> {
 				var toRet = [];
 				obj.forEach((e) => {
 					if (e.IS_FEATURED == true) {
@@ -66,6 +67,7 @@ class App {
 				if (toRet != null) {
 					toRet.forEach((e) => {
 						e.IMG_URL = API_URL + '/Images/Products/' + e.IMG_URL;
+						console.log(e.IMG_URL);
 					})
 				}
 				res.send(toRet);
@@ -161,17 +163,19 @@ class App {
 		};
 
 		router.get('*', (req, res,next) => {
-			var file = path.join(dir, req.path.replace(/\/$/, '/index.html'));
+			var file = path.join(dir, req.path.replace(/\/$/, '/index.html'));			
 			if (file.indexOf(dir + path.sep) !== 0) {
 				return res.status(403).end('Forbidden');
 			}
 			var type = mime[path.extname(file).slice(1)] || 'text/plain';
+			file = file.replace('\\bin\\','\\');
 			var s = fs.createReadStream(file);
+			
 			s.on('open', function () {
 				res.set('Content-Type', type);
 				s.pipe(res);
 			});
-			s.on('error', function () {
+			s.on('error', function () {			   
 				res.set('Content-Type', 'text/plain');
 				res.status(404).end('Not found');
 			});

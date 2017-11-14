@@ -18,7 +18,7 @@ export class BLC
     }
 
     getProduct(API_URL, PRODUCT_ID): Promise<any> {
-        return new Promise(function (resolve, reject) {
+        return new Promise( (resolve, reject) => {
             var file = './data/Products.json'
             jsonfile.readFile(file, function (err, obj) {
                 
@@ -35,7 +35,7 @@ export class BLC
     }
 
     getProductReviews(PRODUCT_ID): Promise<any> {
-        return new Promise(function (resolve, reject) {
+        return new Promise((resolve, reject) => {
             var file = './data/Reviews.json'
             jsonfile.readFile(file, function (err, obj) {
                 
@@ -49,9 +49,9 @@ export class BLC
     }
 
     getCategoryProducts(API_URL, CATEGORY_ID, PAGE): Promise<any> {
-        return new Promise(function (resolve, reject) {
+        return new Promise((resolve, reject) => {
             var file = './data/Products.json'
-            jsonfile.readFile(file, function (err, obj) {
+            jsonfile.readFile(file, (err, obj) => {
 
                 if (obj != null) {
                     obj = obj.filter(function (x) { return x.CATEGORY_ID == CATEGORY_ID });
@@ -69,7 +69,7 @@ export class BLC
 
     getProductImages(API_URL, PRODUCT_ID): Promise<any> {
         
-                return new Promise(function (resolve, reject) {
+                return new Promise( (resolve, reject) => {
                     var file = './data/ProductImages.json';
                     var data = [];
                     jsonfile.readFile(file, function (err, obj) {

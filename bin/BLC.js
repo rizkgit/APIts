@@ -14,7 +14,7 @@ class BLC {
         return this.dalc.Edit_Category(cat);
     }
     getProduct(API_URL, PRODUCT_ID) {
-        return new Promise(function (resolve, reject) {
+        return new Promise((resolve, reject) => {
             var file = './data/Products.json';
             jsonfile.readFile(file, function (err, obj) {
                 if (obj != null) {
@@ -28,7 +28,7 @@ class BLC {
         });
     }
     getProductReviews(PRODUCT_ID) {
-        return new Promise(function (resolve, reject) {
+        return new Promise((resolve, reject) => {
             var file = './data/Reviews.json';
             jsonfile.readFile(file, function (err, obj) {
                 if (obj != null) {
@@ -39,9 +39,9 @@ class BLC {
         });
     }
     getCategoryProducts(API_URL, CATEGORY_ID, PAGE) {
-        return new Promise(function (resolve, reject) {
+        return new Promise((resolve, reject) => {
             var file = './data/Products.json';
-            jsonfile.readFile(file, function (err, obj) {
+            jsonfile.readFile(file, (err, obj) => {
                 if (obj != null) {
                     obj = obj.filter(function (x) { return x.CATEGORY_ID == CATEGORY_ID; });
                 }
@@ -56,7 +56,7 @@ class BLC {
         });
     }
     getProductImages(API_URL, PRODUCT_ID) {
-        return new Promise(function (resolve, reject) {
+        return new Promise((resolve, reject) => {
             var file = './data/ProductImages.json';
             var data = [];
             jsonfile.readFile(file, function (err, obj) {
