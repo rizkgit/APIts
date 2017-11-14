@@ -4,7 +4,7 @@ import {DALC} from './DALC';
 import * as jsonfile from 'jsonfile';
 export class BLC
 {
-    page_size = 5;
+    page_size = 5;   
     dalc: DALC;
     constructor(){
         this.dalc = new DALC();
@@ -17,10 +17,75 @@ export class BLC
         return this.dalc.Edit_Category(cat);
     }
 
+
+    getProducts(API_URL,page_number): Promise<any>{
+        return new Promise((resolve,reject) => {          
+			var file = './data/Products.json'
+			jsonfile.readFile(file, (err, obj)=> {
+				var toRet = obj.slice((page_number - 1) * this.page_size, page_number * this.page_size);
+				if (toRet != null) {
+					toRet.forEach((e) => {
+						e.IMG_URL = API_URL + '/Images/Products/' + e.IMG_URL;
+					})
+				}
+				resolve(toRet);
+			})
+        });
+    }
+
+    getCategories(): Promise<any> {
+       return new Promise((reject,resolve) =>{
+        var file = './data/Categories.json'
+        jsonfile.readFile(file, (err, obj) => {
+            reject(obj);
+        })
+       });
+    }
+
+    getRootCategories(API_URL): Promise<any>{
+        return new Promise((resolve,reject) => {
+            var file = './data/Categories.json'
+			jsonfile.readFile(file, (err, obj) => {
+				var toRet = [];
+				obj.forEach((e) => {
+					if (e.PARENT_ID == "0") {
+						toRet.push(e);
+					}
+				});
+				if (toRet != null) {
+					toRet.forEach((e) => {
+						e.IMG_URL = API_URL + '/Images/Categories/' + e.IMG_URL;
+					})
+				}
+				resolve(toRet);
+			})
+        });
+    }
+
+    getFeaturedProducts(API_URL: string): Promise<any>{
+       return new Promise((resolve,reject)=>{
+        var file = './data/Products.json'
+        jsonfile.readFile(file, (err, obj)=> {
+            var toRet = [];
+            obj.forEach((e) => {
+                if (e.IS_FEATURED == true) {
+                    toRet.push(e)
+                };
+            })
+            if (toRet != null) {
+                toRet.forEach((e) => {
+                    e.IMG_URL = API_URL + '/Images/Products/' + e.IMG_URL;
+                })
+            }
+            resolve(toRet);
+        })
+       });
+    }
+
     getProduct(API_URL, PRODUCT_ID): Promise<any> {
         return new Promise( (resolve, reject) => {
             var file = './data/Products.json'
-            jsonfile.readFile(file, function (err, obj) {
+            jsonfile.readFile(file, (err, obj) => {
                 
                 if (obj != null) {
                     obj = obj.filter(function (x) { return x.ID == PRODUCT_ID });
@@ -37,7 +102,7 @@ export class BLC
     getProductReviews(PRODUCT_ID): Promise<any> {
         return new Promise((resolve, reject) => {
             var file = './data/Reviews.json'
-            jsonfile.readFile(file, function (err, obj) {
+            jsonfile.readFile(file, (err, obj) => {
                 
                 if (obj != null) {
                     obj = obj.filter(function (x) { return x.ID == PRODUCT_ID });

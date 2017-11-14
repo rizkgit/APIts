@@ -17,6 +17,7 @@ import * as path from 'path';
 import * as fs from 'fs';
 import {BLC} from './BLC';
 import {Category} from './BLC_Entities';
+const publicIp = require('public-ip');
 
 
 class App {
@@ -55,63 +56,20 @@ class App {
 		});
 
 		router.get('/FeaturedProducts', (req, res, next) => {
-
-			var file = './data/Products.json'
-			jsonfile.readFile(file, (err, obj)=> {
-				var toRet = [];
-				obj.forEach((e) => {
-					if (e.IS_FEATURED == true) {
-						toRet.push(e)
-					};
-				})
-				if (toRet != null) {
-					toRet.forEach((e) => {
-						e.IMG_URL = API_URL + '/Images/Products/' + e.IMG_URL;
-						console.log(e.IMG_URL);
-					})
-				}
-				res.send(toRet);
-			})
+			this.blc.getFeaturedProducts(API_URL).then((data)=>res.send(data));			
 		});
 
 		router.get('/RootCategories', (req, res, next) => {
-			var file = './data/Categories.json'
-			jsonfile.readFile(file, function (err, obj) {
-				var toRet = [];
-				obj.forEach((e) => {
-					if (e.PARENT_ID == "0") {
-						toRet.push(e);
-					}
-				});
-				if (toRet != null) {
-					toRet.forEach((e) => {
-						e.IMG_URL = API_URL + '/Images/Categories/' + e.IMG_URL;
-					})
-				}
-				res.send(toRet);
-			})
+			this.blc.getRootCategories(API_URL).then((data) => res.send(data));
 		});
 
 		router.get('/Categories', (req, res, next) => {
-			var file = './data/Categories.json'
-			jsonfile.readFile(file, function (err, obj) {
-				res.send(obj);
-			})
+			this.blc.getCategories().then((data)=> res.send(data));
 		});
 
-		router.post('/Products', (req, res, next) => {
-			var page_size = 5;
+		router.post('/Products', (req, res, next) => {			
 			var page_number = req.body.page;
-			var file = './data/Products.json'
-			jsonfile.readFile(file, function (err, obj) {
-				var toRet = obj.slice((page_number - 1) * page_size, page_number * page_size);
-				if (toRet != null) {
-					toRet.forEach((e) => {
-						e.IMG_URL = API_URL + '/Images/Products/' + e.IMG_URL;
-					})
-				}
-				res.send(toRet);
-			})
+			this.blc.getProducts(API_URL,page_number).then((data) => res.send(data));
 		});
 
 		router.post('/CategoryProducts', (req, res, next) => {
@@ -121,6 +79,13 @@ class App {
 				.then((data) => res.send(data));
 
 		});
+
+		router.post('/ProductReviews',  (req, res,next) =>{
+			var PRODUCT_ID = req.body.PRODUCT_ID;
+			var page_number = req.body.page;			
+			this.blc.getProductReviews(PRODUCT_ID).then((data) => res.send(data));
+		})
+
 		router.post('/ProductImages', (req, res, next) => {
 			var PRODUCT_ID = req.body.PRODUCT_ID;
 			var page_number = req.body.page;
@@ -135,11 +100,7 @@ class App {
 				});
 		});
 
-		router.post('/ProductReviews',  (req, res,next) =>{
-			var PRODUCT_ID = req.body.PRODUCT_ID;
-			var page_number = req.body.page;			
-			this.blc.getProductReviews(PRODUCT_ID).then((data) => res.send(data));
-		})
+	
 		
 		router.post('/Edit_Category', (req, res,next) => {
 			let cat = new Category();
@@ -188,8 +149,7 @@ class App {
 
 let MyApp = new App().express;
 const port = 4250
-const publicIp = require('public-ip');
-var API_URL = '';
+var API_URL = ''
 
 publicIp.v4().then(ip => {
 	API_URL = 'http://' + ip + ':' + port;
