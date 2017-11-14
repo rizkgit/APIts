@@ -9,6 +9,12 @@ export class BLC
     constructor(){
         this.dalc = new DALC();
     }
+
+    initializDB(){
+        this.dalc.InitializeDB();
+    }
+
+
     getAllCategories(){       
         return  this.dalc.getAllCategories();     
     }
@@ -43,23 +49,7 @@ export class BLC
     }
 
     getRootCategories(API_URL): Promise<any>{
-        return new Promise((resolve,reject) => {
-            var file = './data/Categories.json'
-			jsonfile.readFile(file, (err, obj) => {
-				var toRet = [];
-				obj.forEach((e) => {
-					if (e.PARENT_ID == "0") {
-						toRet.push(e);
-					}
-				});
-				if (toRet != null) {
-					toRet.forEach((e) => {
-						e.IMG_URL = API_URL + '/Images/Categories/' + e.IMG_URL;
-					})
-				}
-				resolve(toRet);
-			})
-        });
+        return this.dalc.getRootCategories();
     }
 
     getFeaturedProducts(API_URL: string): Promise<any>{

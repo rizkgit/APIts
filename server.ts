@@ -50,6 +50,10 @@ class App {
 			});
 		});
 
+		router.get('/InitializeDB', (req, res, next) => {			
+			this.blc.initializDB();
+			res.send('DB Initialized');
+		});
 
 		router.get('/AllCategories', (req, res, next) => {			
 			res.send(this.blc.getAllCategories().then((data) => console.log(data)));

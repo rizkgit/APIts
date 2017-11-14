@@ -7,6 +7,9 @@ class BLC {
         this.page_size = 5;
         this.dalc = new DALC_1.DALC();
     }
+    initializDB() {
+        this.dalc.InitializeDB();
+    }
     getAllCategories() {
         return this.dalc.getAllCategories();
     }
@@ -36,23 +39,7 @@ class BLC {
         });
     }
     getRootCategories(API_URL) {
-        return new Promise((resolve, reject) => {
-            var file = './data/Categories.json';
-            jsonfile.readFile(file, (err, obj) => {
-                var toRet = [];
-                obj.forEach((e) => {
-                    if (e.PARENT_ID == "0") {
-                        toRet.push(e);
-                    }
-                });
-                if (toRet != null) {
-                    toRet.forEach((e) => {
-                        e.IMG_URL = API_URL + '/Images/Categories/' + e.IMG_URL;
-                    });
-                }
-                resolve(toRet);
-            });
-        });
+        return this.dalc.getRootCategories();
     }
     getFeaturedProducts(API_URL) {
         return new Promise((resolve, reject) => {
