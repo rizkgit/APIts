@@ -90,5 +90,10 @@ class BLC {
             });
         });
     }
+    test() {
+        return new Promise((resolve, reject) => {
+            this.dalc.test('Joe Salloum').then((data) => resolve(true));
+        });
+    }
 }
 exports.BLC = BLC;

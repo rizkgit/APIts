@@ -55,6 +55,10 @@ class App {
 			res.send('DB Initialized');
 		});
 
+		router.get('/test', (req, res, next) => {			
+			this.blc.test().then((data) => res.send('Voila'));
+		});
+
 		router.get('/AllCategories', (req, res, next) => {			
 			res.send(this.blc.getAllCategories().then((data) => console.log(data)));
 		});

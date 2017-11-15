@@ -2,6 +2,7 @@
 import { Category } from './BLC_Entities';
 import * as mysql from 'mysql';
 import * as jsonfile from 'jsonfile';
+import { setTimeout } from 'timers';
 // ---------------------
 
 // ---------------------
@@ -28,6 +29,7 @@ export class DALC {
             .then((passed) => this.InitilizeProductImages())
             .then((passed) => this.InitilizeReviews());
     }
+
 
     DropAndCreateDB(): Promise<any> {
         return new Promise((resolve, reject) => {
@@ -123,7 +125,7 @@ export class DALC {
                                     ?,?
                                 )
                                 `,
-                                [element.ID,element.IMG_URL],
+                                [element.ID, element.IMG_URL],
                                 (err, result) => {
                                     if (err != null) { console.log(err); }
                                 });
@@ -152,7 +154,7 @@ export class DALC {
                                     ?,?,?,?
                                 )
                                 `,
-                                [element.ID,element.REVIEWER,element.MSG,element.RATING],
+                                [element.ID, element.REVIEWER, element.MSG, element.RATING],
                                 (err, result) => {
                                     if (err != null) { console.log(err); }
                                 });
@@ -168,7 +170,7 @@ export class DALC {
     getFeaturedProducts(): Promise<any> {
         return new Promise((resolve, reject) => {
             this.con.query('SELECT * FROM TBL_PRODUCT WHERE IS_FEATURED= 1', (err, result) => {
-                if (err){
+                if (err) {
                     console.log(err);
                     reject(err);
                 }
@@ -186,7 +188,7 @@ export class DALC {
     getAllCategories(): Promise<any> {
         return new Promise((resolve, reject) => {
             this.con.query("SELECT * FROM TBL_CATEGORY", function (err, result) {
-                if (err){
+                if (err) {
                     console.log(err);
                     reject(err);
                 }
@@ -207,10 +209,10 @@ export class DALC {
         });
     }
 
-    getProduct(PRODUCT_ID: number) : Promise<any>{
-        return new Promise((resolve,reject)=>{
-            this.con.query('SELECT * FROM TBL_PRODUCT WHERE PRODUCT_ID = ?',[PRODUCT_ID],(err,result)=>{
-                if (err){
+    getProduct(PRODUCT_ID: number): Promise<any> {
+        return new Promise((resolve, reject) => {
+            this.con.query('SELECT * FROM TBL_PRODUCT WHERE PRODUCT_ID = ?', [PRODUCT_ID], (err, result) => {
+                if (err) {
                     console.log(err);
                     reject(err);
                 }
@@ -219,11 +221,11 @@ export class DALC {
         });
     }
 
-    getProducts(page_number: number,page_size:number): Promise<any>{
-        return new Promise((resolve,reject)=>{
-            var start_row = (page_number - 1) * page_size;           
-            this.con.query('SELECT * FROM TBL_PRODUCT LIMIT ?,?',[start_row,page_size],(err,result)=>{                
-                if (err){
+    getProducts(page_number: number, page_size: number): Promise<any> {
+        return new Promise((resolve, reject) => {
+            var start_row = (page_number - 1) * page_size;
+            this.con.query('SELECT * FROM TBL_PRODUCT LIMIT ?,?', [start_row, page_size], (err, result) => {
+                if (err) {
                     console.log(err);
                     reject(err);
                 }
@@ -232,10 +234,10 @@ export class DALC {
         });
     }
 
-    getProductImages(PRODUCT_ID:number): Promise<any>{
-        return new Promise((resolve,reject) => {
-            this.con.query('SELECT * FROM TBL_PRODUCT_IMAGE WHERE PRODUCT_ID= ?',[PRODUCT_ID],(err,result)=>{
-                if (err){
+    getProductImages(PRODUCT_ID: number): Promise<any> {
+        return new Promise((resolve, reject) => {
+            this.con.query('SELECT * FROM TBL_PRODUCT_IMAGE WHERE PRODUCT_ID= ?', [PRODUCT_ID], (err, result) => {
+                if (err) {
                     console.log(err);
                     reject(err);
                 }
@@ -244,27 +246,68 @@ export class DALC {
         });
     }
 
-    getCategoryProducts(CATEGORY_ID: number,page_number : number,page_size:number):Promise<any>{
-        return new Promise((resolve,reject)=>{
-            var start_row = (page_number - 1) * page_size; 
-            this.con.query('SELECT * FROM TBL_PRODUCT WHERE CATEGORY_ID = ? LIMIT ?,5',[CATEGORY_ID,start_row],(err,result)=>{
-                if (err){
+    getCategoryProducts(CATEGORY_ID: number, page_number: number, page_size: number): Promise<any> {
+        return new Promise((resolve, reject) => {
+            var start_row = (page_number - 1) * page_size;
+            this.con.query('SELECT * FROM TBL_PRODUCT WHERE CATEGORY_ID = ? LIMIT ?,5', [CATEGORY_ID, start_row], (err, result) => {
+                if (err) {
                     console.log(err);
                     reject(err);
-                }                
+                }
                 resolve(result);
             });
         });
     }
 
     getProductReviews(PRODUCT_ID): Promise<any> {
-        return new Promise((resolve,reject)=>{
-            this.con.query('SELECT * FROM TBL_REVIEW WHERE PRODUCT_ID = ?',[PRODUCT_ID],(err,result)=>{
-                if (err){
+        return new Promise((resolve, reject) => {
+            this.con.query('SELECT * FROM TBL_REVIEW WHERE PRODUCT_ID = ?', [PRODUCT_ID], (err, result) => {
+                if (err) {
                     console.log(err);
                     reject(err);
-                }  
+                }
                 resolve(result);
+            });
+        });
+    }
+
+    Edit_Test(name: string, timeout: number, rollit: boolean): Promise<any> {
+        return new Promise((resolve, reject) => {
+
+            this.con.query('INSERT INTO TBL_TEST (NAME) VALUES (?)', [name], (err, result) => {
+                if (err) { reject(err) }
+                else {
+                    if (rollit == true) {
+                        setTimeout(() => { resolve(result); }, timeout);
+                    }
+                    else {
+                        resolve(true);
+                    }
+
+                }
+            });
+        });
+    }
+
+    test(name: string): Promise<any> {
+        return new Promise((resolve, reject) => {
+            this.con.beginTransaction((err) => {
+                //Call PreEvent
+
+
+
+                this.Edit_Test('Alain',0,false).then(() => console.log('Alain Is Created')).catch((err) => { this.con.rollback });
+                this.Edit_Test('Garen',3000,false).then(() => console.log('Garen Is Created')).catch((err) => { this.con.rollback });
+                this.Edit_Test('joe',10000,false).then(() => console.log('Joe Is Created')).catch((err) => { this.con.rollback });
+                //this.con.rollback(()=>resolve(true));
+                //this.con.commit(()=>resolve(true));
+
+                var jsonfile = require('jsonfile')
+                var file = '/data/PRoducts.json'
+                jsonfile.readFile(file, (err, obj) => {
+                    this.con.rollback(() => resolve(true));
+                })
+
             });
         });
     }
