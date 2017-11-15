@@ -46,7 +46,6 @@ class BLC {
     getProduct(API_URL, PRODUCT_ID) {
         return new Promise((resolve, reject) => {
             this.dalc.getProduct(PRODUCT_ID).then((data) => {
-                console.log(data);
                 if (data != null) {
                     data[0].IMG_URL = API_URL + '/Images/Products/' + data[0].IMG_URL;
                 }
@@ -67,39 +66,30 @@ class BLC {
     }
     getCategoryProducts(API_URL, CATEGORY_ID, PAGE) {
         return new Promise((resolve, reject) => {
-            var file = './data/Products.json';
-            jsonfile.readFile(file, (err, obj) => {
-                if (obj != null) {
-                    obj = obj.filter(function (x) { return x.CATEGORY_ID == CATEGORY_ID; });
-                }
-                var toRet = obj.slice((PAGE - 1) * this.page_size, PAGE * this.page_size);
-                if (toRet != null) {
-                    toRet.forEach((e) => {
+            this.dalc.getCategoryProducts(CATEGORY_ID).then((data) => {
+                if (data != null) {
+                    data.forEach(e => {
                         e.IMG_URL = API_URL + '/Images/Products/' + e.IMG_URL;
                     });
+                    resolve(data);
                 }
-                resolve(toRet);
             });
         });
     }
     getProductImages(API_URL, PRODUCT_ID) {
         return new Promise((resolve, reject) => {
-            var file = './data/ProductImages.json';
-            var data = [];
-            jsonfile.readFile(file, function (err, obj) {
-                if (obj != null) {
-                    obj = obj.filter(function (x) { return x.ID == PRODUCT_ID; });
-                }
-                if (obj != null) {
-                    obj.forEach((e) => {
-                        e.IMG_URL = API_URL + '/Images/ProductImages/' + e.IMG_URL;
-                        data.push(e);
+            this.dalc.getProductImages(PRODUCT_ID).then((data) => {
+                if ((data == null) || (data.length == 0)) {
+                    this.dalc.getProduct(PRODUCT_ID).then((prod) => {
+                        var toRet = [];
+                        toRet.push({ 'PRODUCT_ID': PRODUCT_ID, 'IMG_URL': API_URL + '/Images/Products/' + prod[0].IMG_URL });
+                        resolve(toRet);
                     });
                 }
-                if ((data == null) || (data.length == 0)) {
-                    reject('No Image found');
-                }
                 else {
+                    data.forEach(e => {
+                        e.IMG_URL = API_URL + '/Images/ProductImages/' + e.IMG_URL;
+                    });
                     resolve(data);
                 }
             });

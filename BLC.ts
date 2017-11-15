@@ -1,33 +1,32 @@
 
-import {Category} from './BLC_Entities';
-import {DALC} from './DALC';
+import { Category } from './BLC_Entities';
+import { DALC } from './DALC';
 import * as jsonfile from 'jsonfile';
-export class BLC
-{
-    page_size = 5;   
+export class BLC {
+    page_size = 5;
     dalc: DALC;
-    constructor(){
+    constructor() {
         this.dalc = new DALC();
     }
 
-    initializDB(){
+    initializDB() {
         this.dalc.InitializeDB();
     }
 
 
-    getAllCategories(){       
-        return  this.dalc.getAllCategories();     
+    getAllCategories() {
+        return this.dalc.getAllCategories();
     }
 
-    Edit_Category(cat: Category){        
+    Edit_Category(cat: Category) {
         return this.dalc.Edit_Category(cat);
     }
 
 
-    getProducts(API_URL,page_number): Promise<any>{
-        return new Promise((resolve,reject)=>{
-            this.dalc.getProducts(page_number,5).then((data)=>{
-                if(data != null){
+    getProducts(API_URL, page_number): Promise<any> {
+        return new Promise((resolve, reject) => {
+            this.dalc.getProducts(page_number, 5).then((data) => {
+                if (data != null) {
                     data.forEach(e => {
                         e.IMG_URL = API_URL + '/Images/Products/' + e.IMG_URL;
                     });
@@ -37,30 +36,28 @@ export class BLC
         });
     }
 
-    getRootCategories(API_URL): Promise<any>{
+    getRootCategories(API_URL): Promise<any> {
         return this.dalc.getRootCategories();
     }
 
-    getFeaturedProducts(API_URL: string): Promise<any>{
-       return new Promise((resolve,reject)=>{
-        this.dalc.getFeaturedProducts().then((data)=>{    
-            if (data != null)
-            {
-             data.forEach((e) => {
-                e.IMG_URL = API_URL + '/Images/Products/' + e.IMG_URL;
-             })
-            }           
-            resolve(data);
+    getFeaturedProducts(API_URL: string): Promise<any> {
+        return new Promise((resolve, reject) => {
+            this.dalc.getFeaturedProducts().then((data) => {
+                if (data != null) {
+                    data.forEach((e) => {
+                        e.IMG_URL = API_URL + '/Images/Products/' + e.IMG_URL;
+                    })
+                }
+                resolve(data);
+            });
         });
-       });
-       
+
     }
 
     getProduct(API_URL, PRODUCT_ID): Promise<any> {
-        return new Promise( (resolve, reject) => {
-            this.dalc.getProduct(PRODUCT_ID).then((data)=>{
-                console.log(data);
-                if (data != null){
+        return new Promise((resolve, reject) => {
+            this.dalc.getProduct(PRODUCT_ID).then((data) => {
+                if (data != null) {
                     data[0].IMG_URL = API_URL + '/Images/Products/' + data[0].IMG_URL;
                 }
                 resolve(data);
@@ -72,59 +69,48 @@ export class BLC
         return new Promise((resolve, reject) => {
             var file = './data/Reviews.json'
             jsonfile.readFile(file, (err, obj) => {
-                
+
                 if (obj != null) {
                     obj = obj.filter(function (x) { return x.ID == PRODUCT_ID });
                 }
-                
+
                 resolve(obj);
             })
         });
     }
 
     getCategoryProducts(API_URL, CATEGORY_ID, PAGE): Promise<any> {
-        return new Promise((resolve, reject) => {
-            var file = './data/Products.json'
-            jsonfile.readFile(file, (err, obj) => {
-
-                if (obj != null) {
-                    obj = obj.filter(function (x) { return x.CATEGORY_ID == CATEGORY_ID });
-                }
-                var toRet = obj.slice((PAGE - 1) * this.page_size, PAGE * this.page_size);
-                if (toRet != null) {
-                    toRet.forEach((e) => {
+        return new Promise((resolve,reject)=>{
+            this.dalc.getCategoryProducts(CATEGORY_ID).then((data) => {
+                if (data != null){
+                    data.forEach(e => {
                         e.IMG_URL = API_URL + '/Images/Products/' + e.IMG_URL;
-                    })
+                    });
+                    resolve(data);
                 }
-                resolve(toRet);
-            })
+            });
         });
     }
 
     getProductImages(API_URL, PRODUCT_ID): Promise<any> {
-        
-                return new Promise( (resolve, reject) => {
-                    var file = './data/ProductImages.json';
-                    var data = [];
-                    jsonfile.readFile(file, function (err, obj) {
-        
-                        if (obj != null) {
-                            obj = obj.filter(function (x) { return x.ID == PRODUCT_ID });
-                        }
-        
-                        if (obj != null) {
-                            obj.forEach((e) => {
-                                e.IMG_URL = API_URL + '/Images/ProductImages/' + e.IMG_URL;
-                                data.push(e);
-                            })
-                        }
-                        if ((data == null) || (data.length == 0)) {
-                            reject('No Image found');
-                        }
-                        else {
-                            resolve(data);
-                        }
+        return new Promise((resolve,reject)=>{
+            this.dalc.getProductImages(PRODUCT_ID).then((data)=>{
+                if ((data == null) || (data.length == 0))
+                {
+                    this.dalc.getProduct(PRODUCT_ID).then((prod)=>{
+                        var toRet = [];
+                        toRet.push({'PRODUCT_ID':PRODUCT_ID,'IMG_URL':API_URL + '/Images/Products/' + prod[0].IMG_URL});                       
+                        resolve(toRet);
                     });
-                })
-            }
+                }
+                else
+                {                    
+                    data.forEach(e => {
+                        e.IMG_URL = API_URL + '/Images/ProductImages/' + e.IMG_URL;
+                    });
+                    resolve(data);
+                }
+            });
+        });
+    }
 }

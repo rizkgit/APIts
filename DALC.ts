@@ -24,7 +24,8 @@ export class DALC {
             .DropAndCreateDB()
             .then((passed) => this.useDB())
             .then((passed) => this.InitilizeCategories())
-            .then((passed) => this.InitilizeProducts());
+            .then((passed) => this.InitilizeProducts())
+            .then((passed) => this.InitilizeProductImages());
     }
 
     DropAndCreateDB(): Promise<any> {
@@ -104,12 +105,42 @@ export class DALC {
         });
     }
 
+    InitilizeProductImages(): Promise<any> {
+        return new Promise((resolve, reject) => {
+            this.con.query('create table TBL_PRODUCT_IMAGE (PRODUCT_IMAGE_ID INT AUTO_INCREMENT PRIMARY KEY,PRODUCT_ID INT, IMG_URL TEXT)', (err, result) => {
+                var file = './data/ProductImages.json'
+                jsonfile.readFile(file, (err, obj) => {
+                    if (obj != null) {
+                        obj.forEach(element => {
+                            //console.log(element);
+                            this.con.query(`INSERT INTO appcommerce.TBL_PRODUCT_IMAGE
+                                (
+                                    PRODUCT_ID,IMG_URL
+                                )
+                                VALUES
+                                (
+                                    ?,?
+                                )
+                                `,
+                                [element.ID,element.IMG_URL],
+                                (err, result) => {
+                                    if (err != null) { console.log(err); }
+                                });
+                        });
+                    }
+                    resolve(true);
+                })
+            })
+        });
+    }
+
 
     getFeaturedProducts(): Promise<any> {
         return new Promise((resolve, reject) => {
             this.con.query('SELECT * FROM TBL_PRODUCT WHERE IS_FEATURED= 1', (err, result) => {
-                if (err != null) {
+                if (err){
                     console.log(err);
+                    reject(err);
                 }
                 resolve(result);
             });
@@ -125,7 +156,10 @@ export class DALC {
     getAllCategories(): Promise<any> {
         return new Promise((resolve, reject) => {
             this.con.query("SELECT * FROM TBL_CATEGORY", function (err, result) {
-                if (err) { reject(err); }
+                if (err){
+                    console.log(err);
+                    reject(err);
+                }
                 resolve(result);
             });
         });
@@ -146,6 +180,10 @@ export class DALC {
     getProduct(PRODUCT_ID: number) : Promise<any>{
         return new Promise((resolve,reject)=>{
             this.con.query('SELECT * FROM TBL_PRODUCT WHERE PRODUCT_ID = ?',[PRODUCT_ID],(err,result)=>{
+                if (err){
+                    console.log(err);
+                    reject(err);
+                }
                 resolve(result);
             });
         });
@@ -154,8 +192,35 @@ export class DALC {
     getProducts(page_number: number,page_size:number): Promise<any>{
         return new Promise((resolve,reject)=>{
             var start_row = (page_number - 1) * page_size;           
-            this.con.query('SELECT * FROM TBL_PRODUCT LIMIT ?,?',[start_row,page_size],(err,result)=>{
-                console.log(result.length);
+            this.con.query('SELECT * FROM TBL_PRODUCT LIMIT ?,?',[start_row,page_size],(err,result)=>{                
+                if (err){
+                    console.log(err);
+                    reject(err);
+                }
+                resolve(result);
+            });
+        });
+    }
+
+    getProductImages(PRODUCT_ID:number): Promise<any>{
+        return new Promise((resolve,reject) => {
+            this.con.query('SELECT * FROM TBL_PRODUCT_IMAGE WHERE PRODUCT_ID= ?',[PRODUCT_ID],(err,result)=>{
+                if (err){
+                    console.log(err);
+                    reject(err);
+                }
+                resolve(result);
+            });
+        });
+    }
+
+    getCategoryProducts(CATEGORY_ID: number):Promise<any>{
+        return new Promise((resolve,reject)=>{
+            this.con.query('SELECT * FROM TBL_PRODUCT WHERE CATEGORY_ID = ?',[CATEGORY_ID],(err,result)=>{
+                if (err){
+                    console.log(err);
+                    reject(err);
+                }                
                 resolve(result);
             });
         });
