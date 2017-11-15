@@ -68,7 +68,6 @@ class App {
         });
         router.post('/ProductReviews', (req, res, next) => {
             var PRODUCT_ID = req.body.PRODUCT_ID;
-            var page_number = req.body.page;
             this.blc.getProductReviews(PRODUCT_ID).then((data) => res.send(data));
         });
         router.post('/ProductImages', (req, res, next) => {

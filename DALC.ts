@@ -25,7 +25,8 @@ export class DALC {
             .then((passed) => this.useDB())
             .then((passed) => this.InitilizeCategories())
             .then((passed) => this.InitilizeProducts())
-            .then((passed) => this.InitilizeProductImages());
+            .then((passed) => this.InitilizeProductImages())
+            .then((passed) => this.InitilizeReviews());
     }
 
     DropAndCreateDB(): Promise<any> {
@@ -134,6 +135,35 @@ export class DALC {
         });
     }
 
+    InitilizeReviews(): Promise<any> {
+        return new Promise((resolve, reject) => {
+            this.con.query('create table TBL_REVIEW (REVIEW_ID INT AUTO_INCREMENT PRIMARY KEY,PRODUCT_ID INT, REVIEWER TEXT,MSG TEXT, RATING INT)', (err, result) => {
+                var file = './data/Reviews.json'
+                jsonfile.readFile(file, (err, obj) => {
+                    if (obj != null) {
+                        obj.forEach(element => {
+                            //console.log(element);
+                            this.con.query(`INSERT INTO appcommerce.TBL_REVIEW
+                                (
+                                    PRODUCT_ID,REVIEWER,MSG,RATING
+                                )
+                                VALUES
+                                (
+                                    ?,?,?,?
+                                )
+                                `,
+                                [element.ID,element.REVIEWER,element.MSG,element.RATING],
+                                (err, result) => {
+                                    if (err != null) { console.log(err); }
+                                });
+                        });
+                    }
+                    resolve(true);
+                })
+            })
+        });
+    }
+
 
     getFeaturedProducts(): Promise<any> {
         return new Promise((resolve, reject) => {
@@ -214,13 +244,26 @@ export class DALC {
         });
     }
 
-    getCategoryProducts(CATEGORY_ID: number):Promise<any>{
+    getCategoryProducts(CATEGORY_ID: number,page_number : number,page_size:number):Promise<any>{
         return new Promise((resolve,reject)=>{
-            this.con.query('SELECT * FROM TBL_PRODUCT WHERE CATEGORY_ID = ?',[CATEGORY_ID],(err,result)=>{
+            var start_row = (page_number - 1) * page_size; 
+            this.con.query('SELECT * FROM TBL_PRODUCT WHERE CATEGORY_ID = ? LIMIT ?,5',[CATEGORY_ID,start_row],(err,result)=>{
                 if (err){
                     console.log(err);
                     reject(err);
                 }                
+                resolve(result);
+            });
+        });
+    }
+
+    getProductReviews(PRODUCT_ID): Promise<any> {
+        return new Promise((resolve,reject)=>{
+            this.con.query('SELECT * FROM TBL_REVIEW WHERE PRODUCT_ID = ?',[PRODUCT_ID],(err,result)=>{
+                if (err){
+                    console.log(err);
+                    reject(err);
+                }  
                 resolve(result);
             });
         });

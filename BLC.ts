@@ -66,22 +66,16 @@ export class BLC {
     }
 
     getProductReviews(PRODUCT_ID): Promise<any> {
-        return new Promise((resolve, reject) => {
-            var file = './data/Reviews.json'
-            jsonfile.readFile(file, (err, obj) => {
-
-                if (obj != null) {
-                    obj = obj.filter(function (x) { return x.ID == PRODUCT_ID });
-                }
-
-                resolve(obj);
-            })
-        });
+       return new Promise((resolve,reject)=>{
+           this.dalc.getProductReviews(PRODUCT_ID).then((data)=>{
+               resolve(data);
+           });
+       });
     }
 
     getCategoryProducts(API_URL, CATEGORY_ID, PAGE): Promise<any> {
         return new Promise((resolve,reject)=>{
-            this.dalc.getCategoryProducts(CATEGORY_ID).then((data) => {
+            this.dalc.getCategoryProducts(CATEGORY_ID,PAGE,5).then((data) => {
                 if (data != null){
                     data.forEach(e => {
                         e.IMG_URL = API_URL + '/Images/Products/' + e.IMG_URL;
