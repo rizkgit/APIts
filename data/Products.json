@@ -6,7 +6,7 @@
 	  "DESCRIPTION":"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.",
 	  "CATEGORY_ID":"1",
 	  "IS_FEATURED":true,
-	  "PRICE":"$ 20"
+	  "PRICE":"20"
   },
   {
 	  "ID":2,
@@ -14,7 +14,7 @@
 	  "TITLE":"Watch 02",
 	  "DESCRIPTION":"Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim pellentesque felis.",
 	  "CATEGORY_ID":"1",
-	  "PRICE":"$ 24"
+	  "PRICE":"24"
   },
   {
 	  "ID":3,
@@ -22,7 +22,7 @@
 	  "TITLE":"Watch 03",
 	  "DESCRIPTION":"Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.",
 	  "CATEGORY_ID":"1",
-	  "PRICE":"$ 30"
+	  "PRICE":"30"
   },
   {
 	  "ID":4,
@@ -31,7 +31,7 @@
 	  "DESCRIPTION":"Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat.",
 	  "CATEGORY_ID":"1",
 	  "IS_FEATURED":true,
-	  "PRICE":"$ 37"
+	  "PRICE":"37"
   },
   {
 	  "ID":5,
@@ -39,7 +39,7 @@
 	  "TITLE":"Watch 05",
 	  "DESCRIPTION":"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.",
 	  "CATEGORY_ID":"1",
-	  "PRICE":"$ 18"
+	  "PRICE":"18"
   },
   {
 	  "ID":6,
@@ -47,7 +47,7 @@
 	  "TITLE":"Clothes 01",
 	  "DESCRIPTION":"Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim pellentesque felis.",
 	  "CATEGORY_ID":"2",
-	  "PRICE":"$ 22"
+	  "PRICE":"22"
   },
   {
 	  "ID":7,
@@ -55,7 +55,7 @@
 	  "TITLE":"Clothes 02",
 	  "DESCRIPTION":"Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.",
 	  "CATEGORY_ID":"2",
-	  "PRICE":"$ 47"
+	  "PRICE":"47"
   },
   {
 	  "ID":8,
@@ -64,7 +64,7 @@
 	  "DESCRIPTION":"Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat.",
 	  "CATEGORY_ID":"2",
 	  "IS_FEATURED":false,
-	  "PRICE":"$ 52"
+	  "PRICE":"52"
   },
   {
 	  "ID":9,
@@ -72,7 +72,7 @@
 	  "TITLE":"Clothes 04",
 	  "DESCRIPTION":"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.",
 	  "CATEGORY_ID":"2",
-	  "PRICE":"$ 33"
+	  "PRICE":"33"
   },
   {
 	  "ID":10,
@@ -80,7 +80,7 @@
 	  "TITLE":"Clothes 05",
 	  "DESCRIPTION":"Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim pellentesque felis.",
 	  "CATEGORY_ID":"2",
-	  "PRICE":"$ 54"
+	  "PRICE":"54"
   },
   {
 	  "ID":11,
@@ -88,7 +88,7 @@
 	  "TITLE":"Home Applicances 01",
 	  "DESCRIPTION":"Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.",
 	  "CATEGORY_ID":"3",
-	  "PRICE":"$ 11"
+	  "PRICE":"11"
   },
   {
 	  "ID":12,
@@ -97,7 +97,7 @@
 	  "DESCRIPTION":"Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat.",
 	  "CATEGORY_ID":"3",
 	  "IS_FEATURED":true,
-	  "PRICE":"$ 99"
+	  "PRICE":"99"
   },
   {
 	  "ID":13,
@@ -105,7 +105,7 @@
 	  "TITLE":"Home Applicances 03",
 	  "DESCRIPTION":"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.",
 	  "CATEGORY_ID":"3",
-	  "PRICE":"$ 34"
+	  "PRICE":"34"
   },
   {
 	  "ID":14,
@@ -113,7 +113,7 @@
 	  "TITLE":"Home Applicances 04",
 	  "DESCRIPTION":"Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim pellentesque felis.",
 	  "CATEGORY_ID":"3",
-	  "PRICE":"$ 23"
+	  "PRICE":"23"
   },
   {
 	  "ID":15,
@@ -121,7 +121,7 @@
 	  "TITLE":"Home Applicances 05",
 	  "DESCRIPTION":"Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.",
 	  "CATEGORY_ID":"3",
-	  "PRICE":"$ 67"
+	  "PRICE":"67"
   },
   {
 	  "ID":16,
@@ -130,7 +130,7 @@
 	  "DESCRIPTION":"Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat.",
 	  "CATEGORY_ID":"4",
 	  "IS_FEATURED":false,
-	  "PRICE":"$ 88"
+	  "PRICE":"88"
   },
   {
 	  "ID":17,
@@ -138,7 +138,7 @@
 	  "TITLE":"Bed Room 02",
 	  "DESCRIPTION":"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.",
 	  "CATEGORY_ID":"4",
-	  "PRICE":"$ 89"
+	  "PRICE":"89"
   },
   {
 	  "ID":18,
@@ -153,7 +153,7 @@
 	  "TITLE":"Bed Room 04",
 	  "DESCRIPTION":"Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.",
 	  "CATEGORY_ID":"4",
-	  "PRICE":"$ 22"
+	  "PRICE":"22"
   },
   {
 	  "ID":20,
@@ -161,7 +161,7 @@
 	  "TITLE":"Bed Room 05",
 	  "DESCRIPTION":"Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat.",
 	  "CATEGORY_ID":"4",
-	  "PRICE":"$ 45"
+	  "PRICE":"45"
   },
   {
 	  "ID":21,
@@ -169,7 +169,7 @@
 	  "TITLE":"Jewellery 01",
 	  "DESCRIPTION":"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.",
 	  "CATEGORY_ID":"5",
-	  "PRICE":"$ 80"
+	  "PRICE":"80"
   },
   {
 	  "ID":22,
@@ -177,7 +177,7 @@
 	  "TITLE":"Jewellery 02",
 	  "DESCRIPTION":"Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim pellentesque felis.",
 	  "CATEGORY_ID":"5",
-	  "PRICE":"$ 345"
+	  "PRICE":"345"
   },
   {
 	  "ID":23,
@@ -185,7 +185,7 @@
 	  "TITLE":"Jewellery 03",
 	  "DESCRIPTION":"Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.",
 	  "CATEGORY_ID":"5",
-	  "PRICE":"$ 55"
+	  "PRICE":"55"
   },
   {
 	  "ID":24,
@@ -193,7 +193,7 @@
 	  "TITLE":"Jewellery 04",
 	  "DESCRIPTION":"Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat.",
 	  "CATEGORY_ID":"5",
-	  "PRICE":"$ 77"
+	  "PRICE":"77"
   },
   {
 	  "ID":25,
@@ -201,7 +201,7 @@
 	  "TITLE":"Jewellery 05",
 	  "DESCRIPTION":"Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.",
 	  "CATEGORY_ID":"5",
-	  "PRICE":"$ 96"
+	  "PRICE":"96"
   },
   {
 	  "ID":26,
@@ -209,7 +209,7 @@
 	  "TITLE":"Product 26",
 	  "DESCRIPTION":"Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet orci. Aenean dignissim pellentesque felis.",
 	  "CATEGORY_ID":"7",
-	  "PRICE":"$ 11"
+	  "PRICE":"11"
   },
   {
 	  "ID":27,
@@ -217,7 +217,7 @@
 	  "TITLE":"Product 27",
 	  "DESCRIPTION":"Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.",
 	  "CATEGORY_ID":"7",
-	  "PRICE":"$ 22"
+	  "PRICE":"22"
   },
   {
 	  "ID":28,
@@ -225,7 +225,7 @@
 	  "TITLE":"Product 28",
 	  "DESCRIPTION":"Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat.",
 	  "CATEGORY_ID":"7",
-	  "PRICE":"$ 33"
+	  "PRICE":"33"
   },
   {
 	  "ID":29,
@@ -233,7 +233,7 @@
 	  "TITLE":"Product 29",
 	  "DESCRIPTION":"Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed arcu. Cras consequat.",
 	  "CATEGORY_ID":"8",
-	  "PRICE":"$ 33"
+	  "PRICE":"33"
   },
   {
 	  "ID":30,
@@ -241,6 +241,6 @@
 	  "TITLE":"Product 30",
 	  "DESCRIPTION":"Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat.",
 	  "CATEGORY_ID":"8",
-	  "PRICE":"$ 69"
+	  "PRICE":"69"
   }
 ]

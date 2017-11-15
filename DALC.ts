@@ -7,75 +7,148 @@ import * as jsonfile from 'jsonfile';
 // ---------------------
 
 // ---------------------
-export class DALC
-{
+export class DALC {
     con;
-    constructor(){    
+    constructor() {
         this.con = mysql.createConnection({
             host: "localhost",
             user: "root",
             password: "rony@mysql2017",
-            database:'AppCommerce'
-        });        
+            database: 'AppCommerce'
+        });
         this.con.connect();
     }
 
-    InitializeDB(){
-        
-        this.con.query('DROP DATABASE IF EXISTS AppCommerce;',(err,result)=>{
-            this.con.query('CREATE DATABASE AppCommerce',(err,result)=>{
-                this.con.query('use AppCommerce',(err,result)=>{
-                    this.con.query('create table TBL_CATEGORY (GATEGORY_ID INT AUTO_INCREMENT PRIMARY KEY, PARENT_ID INT , TITLE TEXT, DESCRIPTION TEXT, ICON TEXT)',(err,result)=>{
-                        var file = './data/Categories.json'
-                        jsonfile.readFile(file, (err, obj) => {
-                            if (obj != null){
-                                obj.forEach(element => {
-                                    console.log(element);
-                                    this.con.query(`INSERT INTO appcommerce.tbl_category
-                                        (
-                                            PARENT_ID,TITLE,DESCRIPTION,ICON
-                                        )
-                                        VALUES
-                                        (
-                                            ?,?,?,?
-                                        )
-                                        `,
-                                        [element.PARENT_ID,element.TITLE,element.DESCRIPTION,element.ICON],
-                                        (err,result)=>{
-                                        console.log(err);
-                                    });
-                                });
-                            }
-                        })
-                    })  
+    InitializeDB() {
+        this
+            .DropAndCreateDB()
+            .then((passed) => this.useDB())
+            .then((passed) => this.InitilizeCategories())
+            .then((passed) => this.InitilizeProducts());
+    }
+
+    DropAndCreateDB(): Promise<any> {
+        return new Promise((resolve, reject) => {
+            this.con.query('DROP DATABASE IF EXISTS AppCommerce;', (err, result) => {
+                this.con.query('CREATE DATABASE AppCommerce', (err, result) => {
+                    resolve(true)
+
                 });
+            });
+        });
+    }
+
+    useDB(): Promise<any> {
+        return new Promise((resolve, reject) => {
+            this.con.query('use AppCommerce;', (err, result) => {
+                resolve(true);
+            });
+        });
+    }
+
+    InitilizeCategories(): Promise<any> {
+        return new Promise((resolve, reject) => {
+            this.con.query('create table TBL_CATEGORY (CATEGORY_ID INT AUTO_INCREMENT PRIMARY KEY, PARENT_ID INT , TITLE TEXT, DESCRIPTION TEXT, ICON TEXT)', (err, result) => {
+                var file = './data/Categories.json'
+                jsonfile.readFile(file, (err, obj) => {
+                    if (obj != null) {
+                        obj.forEach(element => {
+                            //console.log(element);
+                            this.con.query(`INSERT INTO appcommerce.tbl_category
+                                (
+                                    PARENT_ID,TITLE,DESCRIPTION,ICON
+                                )
+                                VALUES
+                                (
+                                    ?,?,?,?
+                                )
+                                `,
+                                [element.PARENT_ID, element.TITLE, element.DESCRIPTION, element.ICON],
+                                (err, result) => {
+                                    if (err != null) { console.log(err); }
+                                });
+                        });
+                    }
+                    resolve(true);
+                })
             })
         });
     }
 
-    Edit_Category(cat: Category){
+    InitilizeProducts(): Promise<any> {
+        return new Promise((resolve, reject) => {
+            this.con.query('create table TBL_PRODUCT (PRODUCT_ID INT AUTO_INCREMENT PRIMARY KEY, IMG_URL TEXT , TITLE TEXT, DESCRIPTION TEXT, CATEGORY_ID INT,IS_FEATURED BIT,PRICE decimal(10,3))', (err, result) => {
+                var file = './data/Products.json'
+                jsonfile.readFile(file, (err, obj) => {
+                    if (obj != null) {
+                        obj.forEach(element => {
+                            //console.log(element);
+                            this.con.query(`INSERT INTO appcommerce.TBL_PRODUCT
+                                (
+                                    IMG_URL,TITLE,DESCRIPTION,CATEGORY_ID,IS_FEATURED,PRICE
+                                )
+                                VALUES
+                                (
+                                    ?,?,?,?,?,?
+                                )
+                                `,
+                                [element.IMG_URL, element.TITLE, element.DESCRIPTION, element.CATEGORY_ID, element.IS_FEATURED, element.PRICE],
+                                (err, result) => {
+                                    if (err != null) { console.log(err); }
+                                });
+                        });
+                    }
+                    resolve(true);
+                })
+            })
+        });
+    }
+
+
+    getFeaturedProducts(): Promise<any> {
+        return new Promise((resolve, reject) => {
+            this.con.query('SELECT * FROM TBL_PRODUCT WHERE IS_FEATURED= 1', (err, result) => {
+                if (err != null) {
+                    console.log(err);
+                }
+                resolve(result);
+            });
+        });
+    }
+
+
+
+    Edit_Category(cat: Category) {
         console.log(JSON.stringify(cat));
     }
 
-    getAllCategories(): Promise<any> {        
-          return new Promise((resolve, reject) => {                      
-              this.con.query("SELECT * FROM TBL_CATEGORY", function (err, result) {                  
-                if (err) {reject(err);}
-                  resolve(result);              
-              });              
-          });
-      }
+    getAllCategories(): Promise<any> {
+        return new Promise((resolve, reject) => {
+            this.con.query("SELECT * FROM TBL_CATEGORY", function (err, result) {
+                if (err) { reject(err); }
+                resolve(result);
+            });
+        });
+    }
 
-      getRootCategories(): Promise<any>{
-          return new Promise((resolve,reject)=>{
-              this.con.query('SELECT * FROM TBL_CATEGORY',(err,result)=>{
-                if (err)  {
+    getRootCategories(): Promise<any> {
+        return new Promise((resolve, reject) => {
+            this.con.query('SELECT * FROM TBL_CATEGORY WHERE PARENT_ID = 0', (err, result) => {
+                if (err) {
                     console.log(err);
                     reject(err);
                 }
                 resolve(result);
-              })
-          });
-      }
+            })
+        });
+    }
+
+    getProduct(PRODUCT_ID: number) : Promise<any>{
+        return new Promise((resolve,reject)=>{
+            this.con.query('SELECT * FROM TBL_PRODUCT WHERE PRODUCT_ID = ?',[PRODUCT_ID],(err,result)=>{
+                resolve(result);
+            });
+        });
+    }
 }
 // ---------------------

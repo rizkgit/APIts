@@ -51,11 +51,14 @@ class App {
             this.blc.getRootCategories(API_URL).then((data) => res.send(data));
         });
         router.get('/Categories', (req, res, next) => {
-            this.blc.getCategories().then((data) => res.send(data));
+            this.blc.getAllCategories().then((data) => res.send(data));
         });
         router.post('/Products', (req, res, next) => {
             var page_number = req.body.page;
             this.blc.getProducts(API_URL, page_number).then((data) => res.send(data));
+        });
+        router.post('/Product', (req, res, next) => {
+            this.blc.getProduct(API_URL, req.body.PRODUCT_ID).then((data) => res.send(data));
         });
         router.post('/CategoryProducts', (req, res, next) => {
             var CATEGORY_ID = req.body.CATEGORY_ID;

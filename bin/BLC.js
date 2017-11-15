@@ -30,48 +30,29 @@ class BLC {
             });
         });
     }
-    getCategories() {
-        return new Promise((reject, resolve) => {
-            var file = './data/Categories.json';
-            jsonfile.readFile(file, (err, obj) => {
-                reject(obj);
-            });
-        });
-    }
     getRootCategories(API_URL) {
         return this.dalc.getRootCategories();
     }
     getFeaturedProducts(API_URL) {
         return new Promise((resolve, reject) => {
-            var file = './data/Products.json';
-            jsonfile.readFile(file, (err, obj) => {
-                var toRet = [];
-                obj.forEach((e) => {
-                    if (e.IS_FEATURED == true) {
-                        toRet.push(e);
-                    }
-                    ;
-                });
-                if (toRet != null) {
-                    toRet.forEach((e) => {
+            this.dalc.getFeaturedProducts().then((data) => {
+                if (data != null) {
+                    data.forEach((e) => {
                         e.IMG_URL = API_URL + '/Images/Products/' + e.IMG_URL;
                     });
                 }
-                resolve(toRet);
+                resolve(data);
             });
         });
     }
     getProduct(API_URL, PRODUCT_ID) {
         return new Promise((resolve, reject) => {
-            var file = './data/Products.json';
-            jsonfile.readFile(file, (err, obj) => {
-                if (obj != null) {
-                    obj = obj.filter(function (x) { return x.ID == PRODUCT_ID; });
+            this.dalc.getProduct(PRODUCT_ID).then((data) => {
+                console.log(data);
+                if (data != null) {
+                    data[0].IMG_URL = API_URL + '/Images/Products/' + data[0].IMG_URL;
                 }
-                if (obj != null) {
-                    obj[0].IMG_URL = API_URL + '/Images/Products/' + obj[0].IMG_URL;
-                }
-                resolve(obj[0]);
+                resolve(data);
             });
         });
     }
