@@ -18,15 +18,13 @@ class BLC {
     }
     getProducts(API_URL, page_number) {
         return new Promise((resolve, reject) => {
-            var file = './data/Products.json';
-            jsonfile.readFile(file, (err, obj) => {
-                var toRet = obj.slice((page_number - 1) * this.page_size, page_number * this.page_size);
-                if (toRet != null) {
-                    toRet.forEach((e) => {
+            this.dalc.getProducts(page_number, 5).then((data) => {
+                if (data != null) {
+                    data.forEach(e => {
                         e.IMG_URL = API_URL + '/Images/Products/' + e.IMG_URL;
                     });
                 }
-                resolve(toRet);
+                resolve(data);
             });
         });
     }

@@ -135,6 +135,15 @@ class DALC {
             });
         });
     }
+    getProducts(page_number, page_size) {
+        return new Promise((resolve, reject) => {
+            var start_row = (page_number - 1) * page_size;
+            this.con.query('SELECT * FROM TBL_PRODUCT LIMIT ?,?', [start_row, page_size], (err, result) => {
+                console.log(result.length);
+                resolve(result);
+            });
+        });
+    }
 }
 exports.DALC = DALC;
 // ---------------------

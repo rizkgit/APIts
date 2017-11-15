@@ -25,17 +25,15 @@ export class BLC
 
 
     getProducts(API_URL,page_number): Promise<any>{
-        return new Promise((resolve,reject) => {          
-			var file = './data/Products.json'
-			jsonfile.readFile(file, (err, obj)=> {
-				var toRet = obj.slice((page_number - 1) * this.page_size, page_number * this.page_size);
-				if (toRet != null) {
-					toRet.forEach((e) => {
-						e.IMG_URL = API_URL + '/Images/Products/' + e.IMG_URL;
-					})
-				}
-				resolve(toRet);
-			})
+        return new Promise((resolve,reject)=>{
+            this.dalc.getProducts(page_number,5).then((data)=>{
+                if(data != null){
+                    data.forEach(e => {
+                        e.IMG_URL = API_URL + '/Images/Products/' + e.IMG_URL;
+                    });
+                }
+                resolve(data);
+            });
         });
     }
 
