@@ -128,7 +128,8 @@ let MyApp = new App().express;
 const port = 4250;
 var API_URL = '';
 publicIp.v4().then(ip => {
-    API_URL = 'http://' + ip + ':' + port;
+    //API_URL = 'http://' + ip + ':' + port;
+    API_URL = 'http://localhost:' + port;
     MyApp.use(body_parser_1.json());
     MyApp.listen(port);
     console.log("API is listening on " + "[" + API_URL + "]");
