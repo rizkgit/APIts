@@ -90,7 +90,7 @@ export class DALC {
                                 `,
                                 [element.PARENT_ID, element.TITLE, element.DESCRIPTION, element.ICON],
                                 (err, result) => {
-                                    if (err != null) { console.log(err); }
+                                    if (err != null) { console.error(err); }
                                 });
                         });
                     }
@@ -119,7 +119,7 @@ export class DALC {
                                 `,
                                 [element.IMG_URL, element.TITLE, element.DESCRIPTION, element.CATEGORY_ID, element.IS_FEATURED, element.PRICE],
                                 (err, result) => {
-                                    if (err != null) { console.log(err); }
+                                    if (err != null) { console.error(err); }
                                 });
                         });
                     }
@@ -148,7 +148,7 @@ export class DALC {
                                 `,
                                 [element.ID, element.IMG_URL],
                                 (err, result) => {
-                                    if (err != null) { console.log(err); }
+                                    if (err != null) { console.error(err); }
                                 });
                         });
                     }
@@ -177,7 +177,7 @@ export class DALC {
                                 `,
                                 [element.ID, element.REVIEWER, element.MSG, element.RATING],
                                 (err, result) => {
-                                    if (err != null) { console.log(err); }
+                                    if (err != null) { console.error(err); }
                                 });
                         });
                     }
@@ -192,7 +192,7 @@ export class DALC {
         return new Promise((resolve, reject) => {
             this.con.query('SELECT * FROM TBL_PRODUCT WHERE IS_FEATURED= 1', (err, result) => {
                 if (err) {
-                    console.log(err);
+                    console.error(err);
                     reject(err);
                 }
                 resolve(result);
@@ -210,7 +210,7 @@ export class DALC {
         return new Promise((resolve, reject) => {
             this.con.query("SELECT * FROM TBL_CATEGORY", function (err, result) {
                 if (err) {
-                    console.log(err);
+                    console.error(err);
                     reject(err);
                 }
                 resolve(result);
@@ -222,7 +222,7 @@ export class DALC {
         return new Promise((resolve, reject) => {
             this.con.query('SELECT * FROM TBL_CATEGORY WHERE PARENT_ID = 0', (err, result) => {
                 if (err) {
-                    console.log(err);
+                    console.error(err);
                     reject(err);
                 }
                 resolve(result);
@@ -234,7 +234,7 @@ export class DALC {
         return new Promise((resolve, reject) => {
             this.con.query('SELECT * FROM TBL_PRODUCT WHERE PRODUCT_ID = ?', [PRODUCT_ID], (err, result) => {
                 if (err) {
-                    console.log(err);
+                    console.error(err);
                     reject(err);
                 }
                 resolve(result);
@@ -247,7 +247,7 @@ export class DALC {
             var start_row = (page_number - 1) * page_size;
             this.con.query('SELECT * FROM TBL_PRODUCT LIMIT ?,?', [start_row, page_size], (err, result) => {
                 if (err) {
-                    console.log(err);
+                    console.error(err);
                     reject(err);
                 }
                 resolve(result);
@@ -259,7 +259,7 @@ export class DALC {
         return new Promise((resolve, reject) => {
             this.con.query('SELECT * FROM TBL_PRODUCT_IMAGE WHERE PRODUCT_ID= ?', [PRODUCT_ID], (err, result) => {
                 if (err) {
-                    console.log(err);
+                    console.error(err);
                     reject(err);
                 }
                 resolve(result);
@@ -272,7 +272,7 @@ export class DALC {
             var start_row = (page_number - 1) * page_size;
             this.con.query('SELECT * FROM TBL_PRODUCT WHERE CATEGORY_ID = ? LIMIT ?,5', [CATEGORY_ID, start_row], (err, result) => {
                 if (err) {
-                    console.log(err);
+                    console.error(err);
                     reject(err);
                 }
                 resolve(result);
@@ -284,7 +284,7 @@ export class DALC {
         return new Promise((resolve, reject) => {
             this.con.query('SELECT * FROM TBL_REVIEW WHERE PRODUCT_ID = ?', [PRODUCT_ID], (err, result) => {
                 if (err) {
-                    console.log(err);
+                    console.error(err);
                     reject(err);
                 }
                 resolve(result);
@@ -296,10 +296,9 @@ export class DALC {
         return  new Promise((resolve,reject)=>{
              this.con.query('INSERT INTO TBL_PERSON (FIRST_NAME,LAST_NAME) VALUES (?,?)',[p.FIRST_NAME,p.LAST_NAME],(err,result)=>{
                 if (err) {
-                    console.log(err);
+                    console.error(err);
                     reject(err);
-                }
-                console.log('DALC: LC: Person created successfully');
+                }                
                 resolve(result);
             })
         });

@@ -3,11 +3,32 @@ import { Category, Person } from './BLC_Entities';
 import { DALC } from './DALC';
 import * as jsonfile from 'jsonfile';
 import { error } from 'util';
+var events = require('events');
 export class BLC {
     page_size = 5;
     dalc: DALC;
+
+    eventEmitter =  new events.EventEmitter();
+
     constructor() {
+        
+        // -------------
         this.dalc = new DALC();
+        // -------------
+
+        // -------------
+        // this.PreEvent_Edit_Person = (p:Person) =>{
+        //     if (p.FIRST_NAME.startsWith("E")){
+        //         throw error('first name cannot starts with E');
+        //     }
+        // }
+        this.eventEmitter.on('PreEvent_Edit_Person',(p:Person)=>{
+            if (p.FIRST_NAME.startsWith("E")){
+                console.log('XXXXXXXXXXX ' + p.FIRST_NAME + ' XXXXXXXXXXXXXX');
+                throw error('First name should not start with E');
+            }
+        })
+        // -------------
     }
 
     initializDB() {
@@ -105,30 +126,28 @@ export class BLC {
     }
 
 
-
+    
+    //PreEvent_Edit_Person:(p: Person) => any;
+    
     Edit_Person(p: Person): Promise<any> {
         return new Promise((resolve, reject) => {
             this.dalc.con.beginTransaction((err) => {
                 (async () => {
-                    try {                
+                    try {
+
+                        // -------------------
+                        this.eventEmitter.emit('PreEvent_Edit_Person',p);
+                        // -------------------
 
                         // -------------------
                         await this.dalc.Edit_Person(p)
-                            .then((data)=>{console.log('BLC: Person created successfully')})
-                            .catch((err)=>{throw err});
+                            .then((data) => {  })
+                            .catch((err) => { throw err });
                         // -------------------
 
-                         // -------------------
-                         //p.FIRST_NAME = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
-                         p.FIRST_NAME = "Rony";
-                         await this.dalc.Edit_Person(p)
-                         .then((data)=>{console.log('BLC: Person created successfully')})
-                         .catch((err)=>{throw err});
-                        // -------------------
 
-                        
                         // -------------------
-                            this.dalc.con.commit(function (err) {
+                        this.dalc.con.commit(function (err) {
                             if (err) {
                                 this.dalc.con.rollback(function () {
                                     throw err;
@@ -144,7 +163,7 @@ export class BLC {
                     catch (e) {
                         this.dalc.con.rollback(function () {
                             reject(e);
-                        });    
+                        });
                     }
                 })();
 

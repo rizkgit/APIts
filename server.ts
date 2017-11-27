@@ -72,8 +72,7 @@ class App {
 			this.blc.getAllCategories().then((data)=> res.send(data));
 		});
 
-		router.post('/Edit_Person',(req,res,next)=>{			
-			res.send(req.body)
+		router.post('/Edit_Person',(req,res,next)=>{						
 			this.blc.Edit_Person(req.body)
 						.then((data)=>{
 							res.send(data);

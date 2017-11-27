@@ -9,10 +9,28 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const DALC_1 = require("./DALC");
+const util_1 = require("util");
+var events = require('events');
 class BLC {
     constructor() {
         this.page_size = 5;
+        this.eventEmitter = new events.EventEmitter();
+        // -------------
         this.dalc = new DALC_1.DALC();
+        // -------------
+        // -------------
+        // this.PreEvent_Edit_Person = (p:Person) =>{
+        //     if (p.FIRST_NAME.startsWith("E")){
+        //         throw error('first name cannot starts with E');
+        //     }
+        // }
+        this.eventEmitter.on('PreEvent_Edit_Person', (p) => {
+            if (p.FIRST_NAME.startsWith("E")) {
+                console.log('XXXXXXXXXXX ' + p.FIRST_NAME + ' XXXXXXXXXXXXXX');
+                throw util_1.error('First name should not start with E');
+            }
+        });
+        // -------------
     }
     initializDB() {
         this.dalc.InitializeDB();
@@ -95,21 +113,18 @@ class BLC {
             });
         });
     }
+    //PreEvent_Edit_Person:(p: Person) => any;
     Edit_Person(p) {
         return new Promise((resolve, reject) => {
             this.dalc.con.beginTransaction((err) => {
                 (() => __awaiter(this, void 0, void 0, function* () {
                     try {
                         // -------------------
-                        yield this.dalc.Edit_Person(p)
-                            .then((data) => { console.log('BLC: Person created successfully'); })
-                            .catch((err) => { throw err; });
+                        this.eventEmitter.emit('PreEvent_Edit_Person', p);
                         // -------------------
                         // -------------------
-                        //p.FIRST_NAME = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
-                        p.FIRST_NAME = "Rony";
                         yield this.dalc.Edit_Person(p)
-                            .then((data) => { console.log('BLC: Person created successfully'); })
+                            .then((data) => { })
                             .catch((err) => { throw err; });
                         // -------------------
                         // -------------------
