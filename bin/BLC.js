@@ -1,4 +1,12 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const DALC_1 = require("./DALC");
 class BLC {
@@ -11,9 +19,6 @@ class BLC {
     }
     getAllCategories() {
         return this.dalc.getAllCategories();
-    }
-    Edit_Category(cat) {
-        return this.dalc.Edit_Category(cat);
     }
     getProducts(API_URL, page_number) {
         return new Promise((resolve, reject) => {
@@ -90,9 +95,43 @@ class BLC {
             });
         });
     }
-    test() {
+    Edit_Person(p) {
         return new Promise((resolve, reject) => {
-            this.dalc.test('Joe Salloum').then((data) => resolve(true));
+            this.dalc.con.beginTransaction((err) => {
+                (() => __awaiter(this, void 0, void 0, function* () {
+                    try {
+                        // -------------------
+                        yield this.dalc.Edit_Person(p)
+                            .then((data) => { console.log('BLC: Person created successfully'); })
+                            .catch((err) => { throw err; });
+                        // -------------------
+                        // -------------------
+                        //p.FIRST_NAME = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+                        p.FIRST_NAME = "Rony";
+                        yield this.dalc.Edit_Person(p)
+                            .then((data) => { console.log('BLC: Person created successfully'); })
+                            .catch((err) => { throw err; });
+                        // -------------------
+                        // -------------------
+                        this.dalc.con.commit(function (err) {
+                            if (err) {
+                                this.dalc.con.rollback(function () {
+                                    throw err;
+                                });
+                            }
+                        });
+                        // -------------------
+                        // -------------------
+                        resolve(true);
+                        // -------------------
+                    }
+                    catch (e) {
+                        this.dalc.con.rollback(function () {
+                            reject(e);
+                        });
+                    }
+                }))();
+            });
         });
     }
 }

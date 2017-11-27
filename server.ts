@@ -16,7 +16,7 @@ import * as cors from 'cors';
 import * as path from 'path';
 import * as fs from 'fs';
 import {BLC} from './BLC';
-import {Category} from './BLC_Entities';
+import {Category, Person} from './BLC_Entities';
 const publicIp = require('public-ip');
 
 
@@ -55,9 +55,6 @@ class App {
 			res.send('DB Initialized');
 		});
 
-		router.get('/test', (req, res, next) => {			
-			this.blc.test().then((data) => res.send('Voila'));
-		});
 
 		router.get('/AllCategories', (req, res, next) => {			
 			res.send(this.blc.getAllCategories().then((data) => console.log(data)));
@@ -73,6 +70,17 @@ class App {
 
 		router.get('/Categories', (req, res, next) => {
 			this.blc.getAllCategories().then((data)=> res.send(data));
+		});
+
+		router.post('/Edit_Person',(req,res,next)=>{			
+			res.send(req.body)
+			this.blc.Edit_Person(req.body)
+						.then((data)=>{
+							res.send(data);
+						})
+						.catch((err)=>{
+							res.send('An Error has occured')
+						});
 		});
 
 		router.post('/Products', (req, res, next) => {			
@@ -112,13 +120,7 @@ class App {
 		});
 
 	
-		
-		router.post('/Edit_Category', (req, res,next) => {
-			let cat = new Category();
-			cat.CATEGORY_ID = 986;			
-			this.blc.Edit_Category(cat);
-		});
-
+	
 		// Serving Static Files
 		// ------------
 		var dir = path.join(__dirname, '');

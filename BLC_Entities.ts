@@ -6,3 +6,10 @@ export class Category
     DESCRIPTION: string;
     ICON: string;
 }
+
+export class Person
+{
+    PERSON_ID: number;
+    FIRST_NAME: string;
+    LAST_NAME: string;
+}

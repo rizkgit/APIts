@@ -11,7 +11,6 @@ const cors = require("cors");
 const path = require("path");
 const fs = require("fs");
 const BLC_1 = require("./BLC");
-const BLC_Entities_1 = require("./BLC_Entities");
 const publicIp = require('public-ip');
 class App {
     //Run configuration methods on the Express instance.
@@ -41,9 +40,6 @@ class App {
             this.blc.initializDB();
             res.send('DB Initialized');
         });
-        router.get('/test', (req, res, next) => {
-            this.blc.test().then((data) => res.send('Voila'));
-        });
         router.get('/AllCategories', (req, res, next) => {
             res.send(this.blc.getAllCategories().then((data) => console.log(data)));
         });
@@ -55,6 +51,16 @@ class App {
         });
         router.get('/Categories', (req, res, next) => {
             this.blc.getAllCategories().then((data) => res.send(data));
+        });
+        router.post('/Edit_Person', (req, res, next) => {
+            res.send(req.body);
+            this.blc.Edit_Person(req.body)
+                .then((data) => {
+                res.send(data);
+            })
+                .catch((err) => {
+                res.send('An Error has occured');
+            });
         });
         router.post('/Products', (req, res, next) => {
             var page_number = req.body.page;
@@ -84,11 +90,6 @@ class App {
                     res.send(array);
                 });
             });
-        });
-        router.post('/Edit_Category', (req, res, next) => {
-            let cat = new BLC_Entities_1.Category();
-            cat.CATEGORY_ID = 986;
-            this.blc.Edit_Category(cat);
         });
         // Serving Static Files
         // ------------

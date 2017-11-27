@@ -263,37 +263,15 @@ class DALC {
             });
         });
     }
-    Edit_Test(name, timeout, rollit) {
+    Edit_Person(p) {
         return new Promise((resolve, reject) => {
-            this.con.query('INSERT INTO TBL_TEST (NAME) VALUES (?)', [name], (err, result) => {
+            this.con.query('INSERT INTO TBL_PERSON (FIRST_NAME,LAST_NAME) VALUES (?,?)', [p.FIRST_NAME, p.LAST_NAME], (err, result) => {
                 if (err) {
+                    console.log(err);
                     reject(err);
                 }
-                else {
-                    if (rollit == true) {
-                        timers_1.setTimeout(() => { resolve(result); }, timeout);
-                    }
-                    else {
-                        resolve(true);
-                    }
-                }
-            });
-        });
-    }
-    test(name) {
-        return new Promise((resolve, reject) => {
-            this.con.beginTransaction((err) => {
-                //Call PreEvent
-                this.Edit_Test('Alain', 0, false).then(() => console.log('Alain Is Created')).catch((err) => { this.con.rollback; });
-                this.Edit_Test('Garen', 3000, false).then(() => console.log('Garen Is Created')).catch((err) => { this.con.rollback; });
-                this.Edit_Test('joe', 10000, false).then(() => console.log('Joe Is Created')).catch((err) => { this.con.rollback; });
-                //this.con.rollback(()=>resolve(true));
-                //this.con.commit(()=>resolve(true));
-                var jsonfile = require('jsonfile');
-                var file = '/data/PRoducts.json';
-                jsonfile.readFile(file, (err, obj) => {
-                    this.con.rollback(() => resolve(true));
-                });
+                console.log('DALC: LC: Person created successfully');
+                resolve(result);
             });
         });
     }
