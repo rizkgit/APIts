@@ -11,14 +11,35 @@ import { setTimeout } from 'timers';
 export class DALC {
     con;
     constructor() {
+
+        this.handleConnection();
+    }
+
+    handleConnection() {
         this.con = mysql.createConnection({
             host: "localhost",
             user: "root",
-            password: "rony@mysql2017",
+            password: "rony1234",
             database: 'AppCommerce'
         });
-        this.con.connect();
+
+        this.con.connect((err) => {
+            if (err) {
+                console.log('error when connecting to db:', err);
+                setTimeout(this.handleConnection, 2000);
+            }
+        });
+
+        this.con.on('error', function (err) {
+            console.log('db error', err);
+            if (err.code === 'PROTOCOL_CONNECTION_LOST') {
+                this.handleConnection();
+            } else {
+                throw err;
+            }
+        });
     }
+
 
     InitializeDB() {
         this
@@ -296,9 +317,9 @@ export class DALC {
 
 
 
-                this.Edit_Test('Alain',0,false).then(() => console.log('Alain Is Created')).catch((err) => { this.con.rollback });
-                this.Edit_Test('Garen',3000,false).then(() => console.log('Garen Is Created')).catch((err) => { this.con.rollback });
-                this.Edit_Test('joe',10000,false).then(() => console.log('Joe Is Created')).catch((err) => { this.con.rollback });
+                this.Edit_Test('Alain', 0, false).then(() => console.log('Alain Is Created')).catch((err) => { this.con.rollback });
+                this.Edit_Test('Garen', 3000, false).then(() => console.log('Garen Is Created')).catch((err) => { this.con.rollback });
+                this.Edit_Test('joe', 10000, false).then(() => console.log('Joe Is Created')).catch((err) => { this.con.rollback });
                 //this.con.rollback(()=>resolve(true));
                 //this.con.commit(()=>resolve(true));
 

@@ -163,6 +163,7 @@ const port = 4250
 var API_URL = ''
 
 publicIp.v4().then(ip => {
+	ip = 'localhost'; // On My Local Machine Only.
 	API_URL = 'http://' + ip + ':' + port;
 	MyApp.use(json());
 	MyApp.listen(port);
