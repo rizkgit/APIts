@@ -8,13 +8,30 @@ const timers_1 = require("timers");
 // ---------------------
 class DALC {
     constructor() {
+        this.handleConnection();
+    }
+    handleConnection() {
         this.con = mysql.createConnection({
             host: "localhost",
             user: "root",
-            password: "rony@mysql2017",
+            password: "rony1234",
             database: 'AppCommerce'
         });
-        this.con.connect();
+        this.con.connect((err) => {
+            if (err) {
+                console.log('error when connecting to db:', err);
+                timers_1.setTimeout(this.handleConnection, 2000);
+            }
+        });
+        this.con.on('error', function (err) {
+            console.log('db error', err);
+            if (err.code === 'PROTOCOL_CONNECTION_LOST') {
+                this.handleConnection();
+            }
+            else {
+                throw err;
+            }
+        });
     }
     InitializeDB() {
         this
