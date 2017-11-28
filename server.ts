@@ -72,12 +72,14 @@ class App {
 			this.blc.getAllCategories().then((data)=> res.send(data));
 		});
 
-		router.post('/Edit_Person',(req,res,next)=>{						
+		router.post('/Edit_Person',(req,res,next)=>{
+			console.log(req.body);
 			this.blc.Edit_Person(req.body)
 						.then((data)=>{
 							res.send(data);
 						})
 						.catch((err)=>{
+							console.log(err);
 							res.send('An Error has occured')
 						});
 		});
